@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resource Editor | APSHO Patient Compass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell admin-shell" data-page="admin">
+      <header class="admin-header">
+        <div>
+          <a class="text-link" href="index.html">Back to resources</a>
+          <h1>Resource Editor</h1>
+          <p>
+            Edit the public resource JSON and publish changes to GitHub as a commit.
+          </p>
+        </div>
+        <div class="status-pill" id="save-status">Not connected</div>
+      </header>
+
+      <main class="admin-layout">
+        <section class="panel config-panel" aria-labelledby="github-settings-heading">
+          <h2 id="github-settings-heading">GitHub Settings</h2>
+          <div class="form-grid">
+            <label>
+              Repository owner
+              <input id="repo-owner" autocomplete="organization" placeholder="example-org" />
+            </label>
+            <label>
+              Repository name
+              <input id="repo-name" autocomplete="off" placeholder="patient-compass-resources" />
+            </label>
+            <label>
+              Branch
+              <input id="repo-branch" autocomplete="off" value="main" />
+            </label>
+            <label>
+              JSON path
+              <input id="repo-path" autocomplete="off" value="resources.json" />
+            </label>
+            <label class="form-grid__wide">
+              Fine-grained token
+              <input
+                id="repo-token"
+                type="password"
+                autocomplete="off"
+                placeholder="Paste token with Contents read/write access"
+              />
+            </label>
+          </div>
+          <div class="button-row">
+            <button class="button button--primary" id="load-github" type="button">Load from GitHub</button>
+            <button class="button button--secondary" id="load-local" type="button">Load local JSON</button>
+            <button class="button button--ghost" id="save-settings" type="button">Remember settings</button>
+          </div>
+          <p class="help-text">
+            Tokens are kept in this browser only. For best security, use a fine-grained token
+            limited to this repository with Contents read/write access.
+          </p>
+        </section>
+
+        <section class="editor-workspace">
+          <aside class="panel resource-list-panel" aria-label="Resources">
+            <div class="editor-tools">
+              <label>
+                Search
+                <input id="editor-search" type="search" placeholder="Find a resource" />
+              </label>
+              <label>
+                Category
+                <select id="editor-category"></select>
+              </label>
+              <button class="button button--secondary" id="add-resource" type="button">Add resource</button>
+            </div>
+            <div class="editor-list" id="editor-list"></div>
+          </aside>
+
+          <section class="panel edit-panel" aria-labelledby="edit-resource-heading">
+            <div class="edit-panel__header">
+              <div>
+                <h2 id="edit-resource-heading">Resource Details</h2>
+                <p id="selected-resource-note">Select a resource to edit.</p>
+              </div>
+              <button class="button button--danger" id="delete-resource" type="button" disabled>Delete</button>
+            </div>
+
+            <form id="resource-form" class="resource-form">
+              <label>
+                Category
+                <select id="field-category" name="category" required></select>
+              </label>
+              <label>
+                ID
+                <input id="field-id" name="id" required />
+              </label>
+              <label>
+                Source Category
+                <input id="field-sourceCategory" name="sourceCategory" />
+              </label>
+              <label>
+                Support Type
+                <input id="field-supportType" name="supportType" required />
+              </label>
+              <label>
+                Organization
+                <input id="field-organization" name="organization" required />
+              </label>
+              <label>
+                Cancer Type
+                <input id="field-cancerType" name="cancerType" />
+              </label>
+              <label>
+                Availability
+                <input id="field-availability" name="availability" />
+              </label>
+              <label>
+                CTA Label
+                <input id="field-ctaLabel" name="ctaLabel" />
+              </label>
+              <label class="resource-form__wide">
+                Title
+                <input id="field-title" name="title" required />
+              </label>
+              <label class="resource-form__wide">
+                URL
+                <input id="field-url" name="url" type="url" required />
+              </label>
+              <label class="resource-form__wide">
+                Description
+                <textarea id="field-description" name="description" rows="6" required></textarea>
+              </label>
+              <div class="button-row resource-form__wide">
+                <button class="button button--primary" type="submit">Apply changes</button>
+                <button class="button button--secondary" id="duplicate-resource" type="button" disabled>
+                  Duplicate
+                </button>
+              </div>
+            </form>
+          </section>
+        </section>
+
+        <section class="panel publish-panel" aria-labelledby="publish-heading">
+          <div>
+            <h2 id="publish-heading">Publish</h2>
+            <p>Review your changes, then commit the updated JSON file to GitHub.</p>
+          </div>
+          <label>
+            Commit message
+            <input id="commit-message" value="Update Patient Compass resources" />
+          </label>
+          <div class="button-row">
+            <button class="button button--primary" id="publish-github" type="button">Commit to GitHub</button>
+            <button class="button button--secondary" id="download-json" type="button">Download JSON</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
