@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support Resources | APSHO Patient Compass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell" data-page="public">
+      <header class="hero">
+        <img class="hero__image" src="assets/images/hero-resources-bg.jpg" alt="" />
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <a class="hero__back" href="https://www.apsho.org/" aria-label="Visit APSHO">APSHO</a>
+          <h1>Support Resources</h1>
+          <p>
+            Browse trusted cancer support resources for practical needs, emotional support,
+            care planning, education, and related services.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#resources">Browse resources</a>
+            <a class="button button--secondary" href="admin.html">Editor</a>
+          </div>
+        </div>
+      </header>
+
+      <main id="resources" class="resource-app" aria-labelledby="resource-heading">
+        <section class="toolbar" aria-label="Resource filters">
+          <div>
+            <h2 id="resource-heading">Resource Library</h2>
+            <p id="resource-summary">Loading resources...</p>
+          </div>
+          <form class="search-box" role="search">
+            <label for="search">Search resources</label>
+            <input id="search" type="search" placeholder="Search by name, topic, or location" />
+          </form>
+        </section>
+
+        <section class="category-tabs" id="category-tabs" aria-label="Support area"></section>
+
+        <section class="resource-layout">
+          <aside class="filters" aria-label="Filter resources">
+            <div class="filter-group">
+              <h3>Support Type</h3>
+              <div id="support-type-filters"></div>
+            </div>
+            <div class="filter-group">
+              <h3>Cancer Type</h3>
+              <div id="cancer-type-filters"></div>
+            </div>
+            <div class="filter-group">
+              <h3>Availability</h3>
+              <div id="availability-filters"></div>
+            </div>
+            <button class="button button--ghost" id="clear-filters" type="button">Clear filters</button>
+          </aside>
+
+          <div>
+            <div class="result-bar">
+              <p id="result-count"></p>
+              <select id="sort-order" aria-label="Sort resources">
+                <option value="title">Sort by title</option>
+                <option value="organization">Sort by organization</option>
+                <option value="availability">Sort by availability</option>
+              </select>
+            </div>
+            <div class="resource-grid" id="resource-grid"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="resource-card-template">
+      <article class="resource-card">
+        <div>
+          <p class="resource-card__eyebrow"></p>
+          <h3></h3>
+          <p class="resource-card__org"></p>
+          <p class="resource-card__description"></p>
+        </div>
+        <dl class="resource-card__meta">
+          <div>
+            <dt>Cancer Type</dt>
+            <dd data-field="cancerType"></dd>
+          </div>
+          <div>
+            <dt>Availability</dt>
+            <dd data-field="availability"></dd>
+          </div>
+        </dl>
+        <a class="resource-card__link" target="_blank" rel="noopener noreferrer"></a>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
